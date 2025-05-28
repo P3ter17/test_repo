@@ -10,7 +10,7 @@ class TestQuadraticFunction(TestCase):
         self.assertEqual(None, result[0])
         self.assertEqual(None, result[1])
 
-    def test_root_of_quadratic_fun_D_equal_than_zero(self):
+    def test_root_of_quadratic_fun_D_equal_zero(self):
         result = root_of_quadratic_fun(1, 2, 1)
         self.assertEqual(-1, result[0])
         self.assertEqual(None, result[1])

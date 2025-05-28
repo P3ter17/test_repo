@@ -4,8 +4,13 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 from math_tasks.sqrt import sqrt_number
+from math_tasks.triangeel import calculate_triangle_angles
 app = FastAPI()
 
+class Triangle(BaseModel):
+    a: float
+    b: float
+    c: float
 
 class Item(BaseModel):
     name: str
@@ -31,3 +36,8 @@ def update_item(item_id: int, item: Item):
 def sqrt(number: float):
     sqrted_number = sqrt_number(number)
     return {"number": number, "sqrted_number": sqrted_number}
+
+@app.get("/triangle/calculate_angles")
+def calculate_angles(triangle: Triangle):
+    angles = calculate_triangle_angles(triangle.a, triangle.b, triangle.c)
+    return {"alfa": angles[0], "beta": angles[1], "gamma": angles[2]}

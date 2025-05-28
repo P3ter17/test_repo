@@ -8,7 +8,6 @@ class TestTriangle(TestCase):
 
 
     def test_calculate_triangle_angles(self):
-        
         angle = calculate_triangle_angles(5, 6, 7)
         talfa = 44.42
         tbeta = 50.7

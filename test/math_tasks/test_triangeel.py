@@ -22,7 +22,7 @@ class TestTriangle(TestCase):
         self.assertEqual(None, angle[1])
         self.assertEqual(None, angle[2])
 
-    def test_calculate_triangle_angles_(self):
+    def test_calculate_triangle_angles_wrong_sizes(self):
         angle = calculate_triangle_angles(1, 2, 3)
         self.assertEqual(None, angle[0])
         self.assertEqual(None, angle[1])

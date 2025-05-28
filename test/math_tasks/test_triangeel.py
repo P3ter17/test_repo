@@ -17,9 +17,13 @@ class TestTriangle(TestCase):
         self.assertEqual(tgama, angle[2])
 
     def test_calculate_triangle_angles_negative(self):
-        angle = calculate_triangle_angles(-1, 0, 5)
+        angle = calculate_triangle_angles(-1, 1, 5)
         self.assertEqual(None, angle[0])
         self.assertEqual(None, angle[1])
         self.assertEqual(None, angle[2])
 
-
+    def test_calculate_triangle_angles_(self):
+        angle = calculate_triangle_angles(1, 2, 3)
+        self.assertEqual(None, angle[0])
+        self.assertEqual(None, angle[1])
+        self.assertEqual(None, angle[2])

@@ -1,3 +1,4 @@
+import math as m
 def root_of_quadratic_fun(a, b, c):
     discriminant = b**2 - 4*a*c
     if a != 0:
@@ -7,8 +8,8 @@ def root_of_quadratic_fun(a, b, c):
             x = -b / (2*a)
             return x, None
         else:
-            x1 = (-b + discriminant) / (2*a)
-            x2 = (-b - discriminant) / (2*a)
+            x1 = (-b + m.sqrt(discriminant)) / (2*a)
+            x2 = (-b - m.sqrt(discriminant)) / (2*a)
             return x1, x2
     else:
         return None, None

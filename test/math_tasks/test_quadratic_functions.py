@@ -16,6 +16,6 @@ class TestQuadraticFunction(TestCase):
         self.assertEqual(None, result[1])
 
     def test_root_of_quadratic_fun_D_greater_than_zero(self):
-        result = root_of_quadratic_fun(1, 1, 0)
+        result = root_of_quadratic_fun(1, 2, 0)
         self.assertEqual(0, result[0])
-        self.assertEqual(-1, result[1])
+        self.assertEqual(-2, result[1])

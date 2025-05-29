@@ -5,9 +5,15 @@ from pydantic import BaseModel
 
 from math_tasks.sqrt import sqrt_number
 from math_tasks.triangeel import calculate_triangle_angles
+from math_tasks.quadratic_functions import root_of_quadratic_fun
 app = FastAPI()
 
 class Triangle(BaseModel):
+    a: float
+    b: float
+    c: float
+
+class Quadratic(BaseModel):
     a: float
     b: float
     c: float
@@ -41,3 +47,10 @@ def sqrt(number: float):
 def calculate_angles(triangle: Triangle):
     angles = calculate_triangle_angles(triangle.a, triangle.b, triangle.c)
     return {"alfa": angles[0], "beta": angles[1], "gamma": angles[2]}
+
+@app.get("/root/quadratic_function")
+def calculate_quadratic_root(quadratic: Quadratic):
+    roots = root_of_quadratic_fun(quadratic.a, quadratic.b, quadratic.c)
+    return {"x1": roots[0], "x2": roots[1]}
+
+

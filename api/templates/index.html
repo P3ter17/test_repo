@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Functions</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/layout.css">
-    <link rel="stylesheet" href="styles/home.css">
+    <link href="{{ url_for('static', path='/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/layout.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/home.css') }}" rel="stylesheet">
 </head>
 <body>
     <header id="top_menu">

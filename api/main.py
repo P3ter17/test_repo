@@ -6,7 +6,17 @@ from pydantic import BaseModel
 from math_tasks.sqrt import sqrt_number
 from math_tasks.triangeel import calculate_triangle_angles
 from math_tasks.quadratic_functions import root_of_quadratic_fun
+
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 app = FastAPI()
+
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+templates = Jinja2Templates(directory="templates")
 
 class Triangle(BaseModel):
     a: float
@@ -52,5 +62,11 @@ def calculate_angles(triangle: Triangle):
 def calculate_quadratic_root(quadratic: Quadratic):
     roots = root_of_quadratic_fun(quadratic.a, quadratic.b, quadratic.c)
     return {"x1": roots[0], "x2": roots[1]}
+
+@app.get("/web_page", response_class=HTMLResponse)
+async def read_item(request: Request):
+    return templates.TemplateResponse(
+        request=request, name="index.html"
+    )
 
 

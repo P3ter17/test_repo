@@ -26,45 +26,109 @@
         <article id="quadratic_function">
             <h1 class="title">Quadratic function</h1>
             <div id="quadratic_function_content">
-                <div class="variables">
-                    <p>A</p>
-                    <p>B</p>
-                    <p>C</p>
-                </div>
-                <div class="input">
-                    <input type="number" placeholder="Enter A">
-                    <input type="number" placeholder="Enter B">
-                    <input type="number" placeholder="Enter C">
-                </div>
-                <nav>
-                    <a class="get_button">Get result</a>
-                </nav>
+                <form id="quadraticForm">
+                    <label for="a">A:</label>
+                    <input type="number" id="qa" name="a" required>
+                    <br>
+                    <label for="b">B:</label>
+                    <input type="number" id="qb" name="b" required>
+                    <br>
+                    <label for="c">C:</label>
+                    <input type="number" id="qc" name="c" required>
+                    <br>
+                    <button type="submit">Get result</button>
+                </form>
                 <div class="result">
-                    <span>Result:</span>
-                    <span>X1 = 5 | X2 = -6</span>
+                    <p>x1: <span id="x1"></span></p>
+                    <p>x2: <span id="x2"></span></p>
                 </div>
+                <script>
+                    document.getElementById('quadraticForm').addEventListener('submit', async function(e) {
+                      e.preventDefault();
+
+                      const a = parseFloat(document.getElementById('qa').value);
+                      const b = parseFloat(document.getElementById('qb').value);
+                      const c = parseFloat(document.getElementById('qc').value);
+
+                      try {
+                        const response = await fetch('http://127.0.0.1:8000/root/quadratic_function', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify({ a, b, c })
+                        });
+
+                        if (!response.ok) {
+                          throw new Error(`Error API: ${response.status}`);
+                        }
+
+                        const data = await response.json();
+                        console.log('Answer from API:', data);
+
+                        document.getElementById('x1').innerText = data.x1 ?? 'N/A';
+                        document.getElementById('x2').innerText = data.x2 ?? 'N/A';
+
+                      } catch (error) {
+                        alert("Error: " + error.message);
+                      }
+                    });
+                </script>
             </div>
         </article>
         <article id="angles_of_triangle">
             <h1 class="title">Angles of triangle</h1>
             <div id="angles_of_triangle_content">
-                <div class="variables">
-                    <p>A</p>
-                    <p>B</p>
-                    <p>C</p>
-                </div>
-                <div class="input">
-                    <input type="number" placeholder="Enter A">
-                    <input type="number" placeholder="Enter B">
-                    <input type="number" placeholder="Enter C">
-                </div>
-                <nav>
-                    <a class="get_button">Get result</a>
-                </nav>
+                <form id="triangleForm">
+                    <label for="a">A:</label>
+                    <input type="number" id="a" name="a" required>
+                    <br>
+                    <label for="b">B:</label>
+                    <input type="number" id="b" name="b" required>
+                    <br>
+                    <label for="c">C:</label>
+                    <input type="number" id="c" name="c" required>
+                    <br>
+                    <button type="submit">Get result</button>
+                </form>
                 <div class="result">
-                    <span>Result:</span>
-                    <span>Alfa: 66 | Beta: 77 | Gamma: 55</span>
+                    <p>Alfa: <span id="alfa"></span></p>
+                    <p>Beta: <span id="beta"></span></p>
+                    <p>Gamma: <span id="gamma"></span></p>
                 </div>
+                <script>
+                    document.getElementById('triangleForm').addEventListener('submit', async function(e) {
+                      e.preventDefault();
+
+                      const a = parseFloat(document.getElementById('a').value);
+                      const b = parseFloat(document.getElementById('b').value);
+                      const c = parseFloat(document.getElementById('c').value);
+
+                      try {
+                        const response = await fetch('http://127.0.0.1:8000/triangle/calculate_angles', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify({ a, b, c })
+                        });
+
+                        if (!response.ok) {
+                          throw new Error(`Error API: ${response.status}`);
+                        }
+
+                        const data = await response.json();
+                        console.log('Answer from API:', data);
+
+                        document.getElementById('alfa').innerText = data.alfa ?? 'N/A';
+                        document.getElementById('beta').innerText = data.beta ?? 'N/A';
+                        document.getElementById('gamma').innerText = data.gamma ?? 'N/A';
+
+                      } catch (error) {
+                        alert("Error: " + error.message);
+                      }
+                    });
+                </script>
             </div>
         </article>
     </main>
@@ -75,3 +139,4 @@
     </footer>
 </body>
 </html>
+
